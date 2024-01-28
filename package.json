@@ -10,13 +10,15 @@
     "test": "jest"
   },
   "dependencies": {
-    "@gluestack-style/react": "latest",
-    "@gluestack-ui/themed": "latest",
-    "@gluestack-ui/config": "latest",
-    "@legendapp/motion": "latest",
     "@expo/html-elements": "latest",
+    "@gluestack-style/react": "latest",
+    "@gluestack-ui/config": "latest",
+    "@gluestack-ui/themed": "latest",
+    "@legendapp/motion": "latest",
+    "i18next": "^23.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-i18next": "^14.0.1",
     "react-native": "0.72.3",
     "react-native-svg": "13.4.0"
   },
