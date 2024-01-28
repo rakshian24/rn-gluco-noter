@@ -1,5 +1,12 @@
 import {
+  AlertCircleIcon,
   ChevronDownIcon,
+  FormControl,
+  FormControlError,
+  FormControlErrorIcon,
+  FormControlErrorText,
+  FormControlLabel,
+  FormControlLabelText,
   Icon,
   Select,
   SelectBackdrop,
@@ -54,29 +61,46 @@ type Props = {
 
 const ReadingType = ({setReadingType, readingType}: Props) => {
   return (
-    <Select
-      mt={'$4'}
-      borderColor="#FAD1E6"
-      onValueChange={setReadingType}
-      selectedValue={readingType}>
-      <SelectTrigger variant="rounded" size="sm">
-        <SelectInput placeholder="Select reading type" />
-        <SelectIcon>
-          <Icon as={ChevronDownIcon} />
-        </SelectIcon>
-      </SelectTrigger>
-      <SelectPortal>
-        <SelectBackdrop />
-        <SelectContent>
-          <SelectDragIndicatorWrapper>
-            <SelectDragIndicator />
-          </SelectDragIndicatorWrapper>
-          {READING_TYPES.map(({value, label}, index) => (
-            <SelectItem key={index} label={label} value={value} />
-          ))}
-        </SelectContent>
-      </SelectPortal>
-    </Select>
+    <FormControl
+      mt={'$5'}
+      size="md"
+      isDisabled={false}
+      isInvalid={false}
+      isReadOnly={false}
+      isRequired={false}>
+      <FormControlLabel mb="$1">
+        <FormControlLabelText>Reading type</FormControlLabelText>
+      </FormControlLabel>
+      <Select
+        borderRadius={'$sm'}
+        borderColor="#FAD1E6"
+        onValueChange={setReadingType}
+        selectedValue={readingType}>
+        <SelectTrigger size="sm">
+          <SelectInput placeholder="Select reading type" />
+          <SelectIcon mr={'$4'}>
+            <Icon as={ChevronDownIcon} />
+          </SelectIcon>
+        </SelectTrigger>
+        <SelectPortal>
+          <SelectBackdrop />
+          <SelectContent>
+            <SelectDragIndicatorWrapper>
+              <SelectDragIndicator />
+            </SelectDragIndicatorWrapper>
+            {READING_TYPES.map(({value, label}, index) => (
+              <SelectItem key={index} label={label} value={value} />
+            ))}
+          </SelectContent>
+        </SelectPortal>
+      </Select>
+      <FormControlError>
+        <FormControlErrorIcon as={AlertCircleIcon} />
+        <FormControlErrorText>
+          Reading value should be between 50 and 400
+        </FormControlErrorText>
+      </FormControlError>
+    </FormControl>
   );
 };
 
