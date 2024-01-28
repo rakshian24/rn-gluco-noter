@@ -6,13 +6,16 @@ import AppTitle from './components/AppTitle';
 import {useTranslation} from 'react-i18next';
 import ReadingDate from './components/ReadingDate';
 import ReadingType from './components/ReadingType';
+import Reading from './components/Reading';
 
 function App(): JSX.Element {
   const {t} = useTranslation();
   const [date, setDate] = useState(new Date());
   const [readingType, setReadingType] = useState('');
+  const [readingValue, setReadingValue] = useState('');
 
   console.log('ReadingType = ', readingType);
+  console.log('readingValue = ', readingValue);
   return (
     <SafeAreaView>
       <GluestackUIProvider config={config}>
@@ -22,6 +25,17 @@ function App(): JSX.Element {
           <ReadingType
             readingType={readingType}
             setReadingType={setReadingType}
+          />
+          <Reading
+            readingValue={readingValue}
+            setReadingValue={value => {
+              console.log('VALUE-REC = ', value);
+              if (value.match('^[0-9]+$')) {
+                setReadingValue(value);
+              } else if (value.length === 0) {
+                setReadingValue('');
+              }
+            }}
           />
         </Box>
       </GluestackUIProvider>
