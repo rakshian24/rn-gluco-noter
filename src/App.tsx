@@ -7,15 +7,18 @@ import {useTranslation} from 'react-i18next';
 import ReadingDate from './components/ReadingDate';
 import ReadingType from './components/ReadingType';
 import Reading from './components/Reading';
+import InsulinDose from './components/InsulinDose';
 
 function App(): JSX.Element {
   const {t} = useTranslation();
   const [date, setDate] = useState(new Date());
   const [readingType, setReadingType] = useState('');
   const [readingValue, setReadingValue] = useState('');
+  const [insulinDoseValue, setInsulinDoseValue] = useState('');
 
-  console.log('ReadingType = ', readingType);
-  console.log('readingValue = ', readingValue);
+  const hideInsulinSelect =
+    readingType === 'AB_1hr' || readingType === 'AL_1hr' || readingType === '';
+
   return (
     <SafeAreaView>
       <GluestackUIProvider config={config}>
@@ -29,7 +32,6 @@ function App(): JSX.Element {
           <Reading
             readingValue={readingValue}
             setReadingValue={value => {
-              console.log('VALUE-REC = ', value);
               if (value.match('^[0-9]+$')) {
                 setReadingValue(value);
               } else if (value.length === 0) {
@@ -37,6 +39,19 @@ function App(): JSX.Element {
               }
             }}
           />
+
+          {!hideInsulinSelect && (
+            <InsulinDose
+              insulinDoseValue={insulinDoseValue}
+              setInsulinDoseValue={value => {
+                if (value.match('^[0-9]+$')) {
+                  setInsulinDoseValue(value);
+                } else if (value.length === 0) {
+                  setInsulinDoseValue('');
+                }
+              }}
+            />
+          )}
         </Box>
       </GluestackUIProvider>
     </SafeAreaView>
